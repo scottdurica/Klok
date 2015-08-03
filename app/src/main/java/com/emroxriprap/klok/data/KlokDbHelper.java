@@ -26,8 +26,6 @@ public class KlokDbHelper extends SQLiteOpenHelper{
                 // for a certain date and all dates *following*, so the forecast data
                 // should be sorted accordingly.
                 KlokContract.KlokEntry._ID + " INTEGER PRIMARY KEY," +
-
-                // the ID of the location entry associated with this weather data
                 KlokContract.KlokEntry.COLUMN_JOB_NAME + " INTEGER NOT NULL, " +
                 KlokContract.KlokEntry.COLUMN_DATE + " INTEGER NOT NULL, " +
                 KlokContract.KlokEntry.COLUMN_ADDRESS_ONE + " TEXT NOT NULL, " +

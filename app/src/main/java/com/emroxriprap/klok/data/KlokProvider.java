@@ -6,6 +6,7 @@ import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
+import android.widget.Toast;
 
 /**
  * Created by administrator on 7/30/15.
@@ -80,11 +81,13 @@ public class KlokProvider extends ContentProvider{
         Uri returnUri;
 
         switch (match) {
-            case SINGLE_ENTRY: {
+            case ALL_ENTRIES: {
                 normalizeDate(values);
                 long _id = db.insert(KlokContract.KlokEntry.TABLE_NAME, null, values);
-                if ( _id > 0 )
+                if ( _id > 0 ) {
                     returnUri = KlokContract.KlokEntry.buildEntriesUri(_id);
+                    Toast.makeText(getContext(), "Inserted", Toast.LENGTH_SHORT).show();
+                }
                 else
                     throw new android.database.SQLException("Failed to insert row into " + uri);
                 break;

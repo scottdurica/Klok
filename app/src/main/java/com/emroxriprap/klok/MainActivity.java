@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
-public class MainActivity extends ActionBarActivity implements RecordsListFragment.OnFragmentInteractionListener {
+public class MainActivity extends ActionBarActivity implements RecordsListFragment.OnFragmentInteractionListener, TestFragment.OnFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +19,7 @@ public class MainActivity extends ActionBarActivity implements RecordsListFragme
         setContentView(R.layout.activity_main);
 
         if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
+            getFragmentManager().beginTransaction()
                     .add(R.id.container, new RecordsListFragment())
                     .commit();
         }

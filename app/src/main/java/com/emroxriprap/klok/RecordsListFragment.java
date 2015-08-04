@@ -2,9 +2,11 @@ package com.emroxriprap.klok;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +24,7 @@ import com.emroxriprap.klok.data.KlokContract;
  * Use the {@link RecordsListFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class RecordsListFragment extends android.support.v4.app.Fragment {
+public class RecordsListFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -41,6 +43,7 @@ public class RecordsListFragment extends android.support.v4.app.Fragment {
     Cursor cursor;
     ListView listView;
     SimpleCursorAdapter simpleCursorAdapter;
+    FloatingActionButton fab;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -102,6 +105,19 @@ public class RecordsListFragment extends android.support.v4.app.Fragment {
                 0
         );
         listView.setAdapter(simpleCursorAdapter);
+        fab = (FloatingActionButton)rootView.findViewById(R.id.fab_add_record);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment testFrag = new TestFragment();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.container,testFrag);
+                transaction.addToBackStack(null);
+
+                transaction.commit();
+
+            }
+        });
         return rootView;
     }
 

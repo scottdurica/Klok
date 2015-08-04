@@ -1,6 +1,7 @@
 package com.emroxriprap.klok;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
@@ -15,7 +16,7 @@ import android.widget.TextView;
 import com.emroxriprap.klok.data.KlokContract;
 
 
-public class TestFragment extends android.support.v4.app.Fragment {
+public class TestFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";

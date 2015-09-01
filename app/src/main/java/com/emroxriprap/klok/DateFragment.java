@@ -2,6 +2,7 @@ package com.emroxriprap.klok;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -14,12 +15,12 @@ import android.widget.CalendarView;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link DatePickerFragment.OnFragmentInteractionListener} interface
+ * {@link DateFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link DatePickerFragment#newInstance} factory method to
+ * Use the {@link DateFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class DatePickerFragment extends Fragment {
+public class DateFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -43,8 +44,8 @@ public class DatePickerFragment extends Fragment {
      * @return A new instance of fragment DatePickerFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static DatePickerFragment newInstance(String param1, String param2) {
-        DatePickerFragment fragment = new DatePickerFragment();
+    public static DateFragment newInstance(String param1, String param2) {
+        DateFragment fragment = new DateFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -52,7 +53,7 @@ public class DatePickerFragment extends Fragment {
         return fragment;
     }
 
-    public DatePickerFragment() {
+    public DateFragment() {
         // Required empty public constructor
     }
 
@@ -69,9 +70,32 @@ public class DatePickerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_date_picker, container, false);
+        View rootView = inflater.inflate(R.layout.frag_date, container, false);
         calendar = (CalendarView) rootView.findViewById(R.id.cv_date_chooser);
         fab = (FloatingActionButton) rootView.findViewById(R.id.fab_next);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                long d = calendar.getDate();
+//                long w = d/1000;
+//                int dateAsInt = (int) w;
+//                Log.d("Value of long ", "" +d);
+//                Log.d("Value of  int ", "" +dateAsInt);
+//                String dateAsText = new SimpleDateFormat("MM-dd-yyyy").format(d);
+//                Log.d("date string from long ", dateAsText);
+                long d = calendar.getDate();
+                int dateInt = Utilities.dateToInt(d);
+                String dateString = Utilities.dateToString(d);
+
+                Fragment entryFrag = JobNameFragment.newInstance(dateString, dateInt);
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.container,entryFrag);
+                transaction.addToBackStack(null);
+
+                transaction.commit();
+
+            }
+        });
         return rootView;
     }
 

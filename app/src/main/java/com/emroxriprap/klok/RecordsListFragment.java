@@ -28,11 +28,11 @@ public class RecordsListFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+//    private static final String ARG_PARAM2 = "param2";
 
     String [] mTableColNames = {
             KlokContract.KlokEntry.COLUMN_JOB_NAME,
-            KlokContract.KlokEntry.COLUMN_DATE
+            KlokContract.KlokEntry.COLUMN_DATE_STRING
 //            ,KlokContract.KlokEntry.COLUMN_ADDRESS_ONE,
 //            KlokContract.KlokEntry.COLUMN_ADDRESS_TWO,
 //            KlokContract.KlokEntry.COLUMN_CITY,
@@ -46,8 +46,8 @@ public class RecordsListFragment extends Fragment {
     FloatingActionButton fab;
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private String dateString;
+//    private String mParam2;
 
     private OnFragmentInteractionListener mListener;
 
@@ -56,15 +56,14 @@ public class RecordsListFragment extends Fragment {
      * this fragment using the provided parameters.
      *
      * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
      * @return A new instance of fragment RecordsListFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static RecordsListFragment newInstance(String param1, String param2) {
+    public static RecordsListFragment newInstance(String param1) {
         RecordsListFragment fragment = new RecordsListFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+//        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -77,8 +76,9 @@ public class RecordsListFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+//            mParam1 = getArguments().getString(ARG_PARAM1);
+//            mParam2 = getArguments().getString(ARG_PARAM2);
+
         }
         cursor = getActivity().getContentResolver().query(KlokContract.KlokEntry.CONTENT_URI,
                 null,
@@ -93,7 +93,7 @@ public class RecordsListFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        View rootView = inflater.inflate(R.layout.fragment_records_list, container, false);
+        View rootView = inflater.inflate(R.layout.frag_records_list, container, false);
         listView = (ListView)rootView.findViewById(R.id.lv_records);
         int [] listItemIdViews = {R.id.tv_list_item_job_name,R.id.tv_list_item_date};
         simpleCursorAdapter = new SimpleCursorAdapter(
@@ -109,9 +109,9 @@ public class RecordsListFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment testFrag = new TestFragment();
+                Fragment dateFrag = new DateFragment();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.container,testFrag);
+                transaction.replace(R.id.container,dateFrag);
                 transaction.addToBackStack(null);
 
                 transaction.commit();

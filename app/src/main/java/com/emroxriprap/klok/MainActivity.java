@@ -11,7 +11,26 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
-public class MainActivity extends ActionBarActivity implements RecordsListFragment.OnFragmentInteractionListener, TestFragment.OnFragmentInteractionListener {
+public class MainActivity extends ActionBarActivity implements RecordsListFragment.OnFragmentInteractionListener, JobNameFragment.OnFragmentInteractionListener,
+DateFragment.OnFragmentInteractionListener, NewJobCreatorFragment.OnFragmentInteractionListener{
+
+
+    @Override
+    public void onBackPressed() {
+        if(getFragmentManager().getBackStackEntryCount() == 1){
+//            getFragmentManager().popBackStack();
+//            setTitle("Klok");
+            getFragmentManager().beginTransaction()
+                    .replace(R.id.container, new RecordsListFragment())
+                    .commit();
+        }
+        else if(getFragmentManager().getBackStackEntryCount() == 0) {
+            super.onBackPressed();
+        }
+        else{
+            getFragmentManager().popBackStack();
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +83,7 @@ public class MainActivity extends ActionBarActivity implements RecordsListFragme
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+            View rootView = inflater.inflate(R.layout.frag_job_name, container, false);
             return rootView;
         }
     }

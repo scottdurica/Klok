@@ -3,14 +3,21 @@ package com.emroxriprap.klok;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.app.ListFragment;
+import android.app.LoaderManager;
+import android.content.CursorLoader;
+import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
+import android.widget.AdapterView;
 import android.widget.SimpleCursorAdapter;
 
 import com.emroxriprap.klok.data.KlokContract;
@@ -24,25 +31,25 @@ import com.emroxriprap.klok.data.KlokContract;
  * Use the {@link RecordsListFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class RecordsListFragment extends Fragment {
+public class RecordsListFragment extends ListFragment implements
+        LoaderManager.LoaderCallbacks<Cursor>{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
 //    private static final String ARG_PARAM2 = "param2";
 
-    String [] mTableColNames = {
-            KlokContract.KlokEntry.COLUMN_JOB_NAME,
-            KlokContract.KlokEntry.COLUMN_DATE_STRING
-//            ,KlokContract.KlokEntry.COLUMN_ADDRESS_ONE,
-//            KlokContract.KlokEntry.COLUMN_ADDRESS_TWO,
-//            KlokContract.KlokEntry.COLUMN_CITY,
-//            KlokContract.KlokEntry.COLUMN_STATE,
-//            KlokContract.KlokEntry.COLUMN_HOURS
+
+    private static final int KLOK_ENTRIES_LOADER = 2;
+    private String [] mTableColumnNames = {
+            KlokContract.KlokEntry.COLUMN_LOCATION,
+            KlokContract.KlokEntry.COLUMN_DATE_STRING,
+            KlokContract.KlokEntry.COLUMN_TIME_DESC
     };
-//    int [] listItemIdViews;
-    Cursor cursor;
-    ListView listView;
-    SimpleCursorAdapter simpleCursorAdapter;
+    private SimpleCursorAdapter adapter;
+    private CoordinatorLayout coordinatorLayout;
+//    Cursor cursor;
+//    ListView listView;
+//    SimpleCursorAdapter simpleCursorAdapter;
     FloatingActionButton fab;
 
     // TODO: Rename and change types of parameters
@@ -80,11 +87,12 @@ public class RecordsListFragment extends Fragment {
 //            mParam2 = getArguments().getString(ARG_PARAM2);
 
         }
-        cursor = getActivity().getContentResolver().query(KlokContract.KlokEntry.CONTENT_URI,
-                null,
-                null,
-                null,
-                null);
+//        cursor = getActivity().getContentResolver().query(KlokContract.KlokEntry.CONTENT_URI,
+//                null,
+//                null,
+//                null,
+//                null);
+        getLoaderManager().initLoader(KLOK_ENTRIES_LOADER,null,this);
 
     }
 
@@ -94,24 +102,26 @@ public class RecordsListFragment extends Fragment {
         // Inflate the layout for this fragment
 
         View rootView = inflater.inflate(R.layout.frag_records_list, container, false);
-        listView = (ListView)rootView.findViewById(R.id.lv_records);
-        int [] listItemIdViews = {R.id.tv_list_item_job_name,R.id.tv_list_item_date};
-        simpleCursorAdapter = new SimpleCursorAdapter(
+//        listView = (ListView)rootView.findViewById(R.id.lv_records);
+        coordinatorLayout = (CoordinatorLayout)rootView.findViewById(R.id.coord_layout);
+        int [] listItemIdViews = {R.id.tv_list_item_job_name,R.id.tv_list_item_date,R.id.tv_list_item_job_desc};
+        adapter = new SimpleCursorAdapter(
                 getActivity(),
                 R.layout.record_list_item_layout,
-                cursor,
-                mTableColNames,
+                null,
+                mTableColumnNames,
                 listItemIdViews,
                 0
         );
-        listView.setAdapter(simpleCursorAdapter);
+//        listView.setAdapter(simpleCursorAdapter);
+        setListAdapter(adapter);
         fab = (FloatingActionButton)rootView.findViewById(R.id.fab_add_record);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Fragment dateFrag = new DateFragment();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.container,dateFrag);
+                transaction.replace(R.id.container, dateFrag);
                 transaction.addToBackStack(null);
 
                 transaction.commit();
@@ -121,11 +131,46 @@ public class RecordsListFragment extends Fragment {
         return rootView;
     }
 
+
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
         }
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        getListView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                location = (TextView) mRootView.findViewById(R.id.tv_job_list_item_job_name);
+//                String jobNameSelected = location.getText().toString();
+//
+//                Fragment timeFrag = TimeDescriptionFragment.newInstance(dateString, dateInt, jobNameSelected);
+//                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+//                transaction.replace(R.id.container, timeFrag);
+//                transaction.addToBackStack(null);
+//
+//                transaction.commit();
+
+
+            }
+        });
+        getListView().setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                Snackbar.make(coordinatorLayout, "Item Marked Paid", Snackbar.LENGTH_LONG).setAction("UNDO", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        Log.d("Snackbar ", "Pressed;");
+                    }
+                }).show();
+                return true;
+            }
+        });
     }
 
     @Override
@@ -143,6 +188,30 @@ public class RecordsListFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        CursorLoader loader = new CursorLoader(
+            getActivity(),
+            KlokContract.KlokEntry.CONTENT_URI,
+            null,
+            null,
+            null,
+            null
+        );
+
+        return loader;
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        ((SimpleCursorAdapter)this.getListAdapter()).swapCursor(data);
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+        ((SimpleCursorAdapter)this.getListAdapter()).swapCursor(null);
     }
 
     /**

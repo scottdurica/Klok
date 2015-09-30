@@ -21,24 +21,25 @@ public class KlokDbHelper extends SQLiteOpenHelper{
     public void onCreate(SQLiteDatabase db) {
         final String SQL_CREATE_ENTRIES_TABLE = "CREATE TABLE " + KlokContract.KlokEntry.TABLE_NAME + " (" +
                 KlokContract.KlokEntry._ID + " INTEGER PRIMARY KEY," +
-                KlokContract.KlokEntry.COLUMN_JOB_NAME + " TEXT NOT NULL, " +
-                KlokContract.KlokEntry.COLUMN_DATE + " INTEGER NOT NULL, " +
-                KlokContract.KlokEntry.COLUMN_DATE_STRING + " TEXT NOT NULL, " +
-//                KlokContract.KlokEntry.COLUMN_ADDRESS_ONE + " TEXT NOT NULL, " +
-//                KlokContract.KlokEntry.COLUMN_ADDRESS_TWO + " TEXT NOT NULL," +
-//
-//                KlokContract.KlokEntry.COLUMN_CITY + " TEXT NOT NULL, " +
-//                KlokContract.KlokEntry.COLUMN_STATE + " TEXT NOT NULL, " +
+                KlokContract.KlokEntry.COLUMN_LOCATION + " TEXT, " +
+                KlokContract.KlokEntry.COLUMN_ADDRESS + " TEXT, " +
+                KlokContract.KlokEntry.COLUMN_DATE + " INTEGER, " +
+                KlokContract.KlokEntry.COLUMN_DATE_STRING + " TEXT, " +
+                KlokContract.KlokEntry.COLUMN_HOURS + " REAL, " +
+                KlokContract.KlokEntry.COLUMN_RATE + " REAL," +
+                KlokContract.KlokEntry.COLUMN_TIME_DESC + " TEXT, " +
+                KlokContract.KlokEntry.COLUMN_LABOR_TOTAL + " REAL, " +
+                KlokContract.KlokEntry.COLUMN_MATERIALS + " REAL, " +
+                KlokContract.KlokEntry.COLUMN_MARKUP + " REAL," +
+                KlokContract.KlokEntry.COLUMN_MATERIAL_DESC + " TEXT, " +
+                KlokContract.KlokEntry.COLUMN_MATERIAL_TOTAL + " REAL, " +
+                KlokContract.KlokEntry.COLUMN_TOTAL + " REAL, " +
+                KlokContract.KlokEntry.COLUMN_INVOICED + " INTEGER);";
 
-                KlokContract.KlokEntry.COLUMN_HOURS + " REAL NOT NULL);";
         final String SQL_CREATE_JOBS_TABLE = "CREATE TABLE " + KlokContract.JobEntry.TABLE_NAME + " (" +
                 KlokContract.JobEntry._ID + " INTEGER PRIMARY KEY," +
-                KlokContract.JobEntry.COLUMN_JOB_NAME + " TEXT NOT NULL, " +
-                KlokContract.JobEntry.COLUMN_ADDRESS_ONE + " TEXT NOT NULL, " +
-                KlokContract.JobEntry.COLUMN_ADDRESS_TWO + " TEXT NOT NULL," +
-
-                KlokContract.JobEntry.COLUMN_CITY + " TEXT NOT NULL, " +
-                KlokContract.JobEntry.COLUMN_STATE + " TEXT NOT NULL);";
+                KlokContract.JobEntry.COLUMN_LOCATION + " VARCHAR NOT NULL, " +
+                KlokContract.JobEntry.COLUMN_ADDRESS + " VARCHAR NOT NULL);";
 
 
         db.execSQL(SQL_CREATE_ENTRIES_TABLE);

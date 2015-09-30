@@ -42,14 +42,21 @@ public class KlokContract {
     public static final class KlokEntry implements BaseColumns {
         public static final String TABLE_NAME = "entries";
 
-        public static final String COLUMN_JOB_NAME = "job_name";
+        public static final String COLUMN_LOCATION = "location";
+        public static final String COLUMN_ADDRESS = "address";
         public static final String COLUMN_DATE = "date";
         public static final String COLUMN_DATE_STRING = "date_string";
-//        public static final String COLUMN_ADDRESS_ONE= "address_one";
-//        public static final String COLUMN_ADDRESS_TWO = "address_two";
-//        public static final String COLUMN_CITY = "city";
-//        public static final String COLUMN_STATE = "state";
-        public static final String COLUMN_HOURS = "hours";
+
+        public static final String COLUMN_HOURS= "hours";
+        public static final String COLUMN_RATE = "rate";
+        public static final String COLUMN_TIME_DESC = "time_desc";
+        public static final String COLUMN_LABOR_TOTAL = "labor_total";
+        public static final String COLUMN_MATERIALS = "materials";
+        public static final String COLUMN_MARKUP= "markup";
+        public static final String COLUMN_MATERIAL_DESC = "material_desc";
+        public static final String COLUMN_MATERIAL_TOTAL = "material_total";
+        public static final String COLUMN_INVOICED = "invoiced";
+        public static final String COLUMN_TOTAL = "total";
 
         public static final Uri CONTENT_URI =
                 BASE_CONTENT_URI.buildUpon().appendPath(PATH_ENTRIES).build();
@@ -70,11 +77,12 @@ public class KlokContract {
     public static final class JobEntry implements BaseColumns {
         public static final String TABLE_NAME = "job_entries";
 
-        public static final String COLUMN_JOB_NAME = "name";
-        public static final String COLUMN_ADDRESS_ONE= "address_one";
-        public static final String COLUMN_ADDRESS_TWO = "address_two";
-        public static final String COLUMN_CITY = "city";
-        public static final String COLUMN_STATE = "state";
+        public static final String COLUMN_LOCATION = "location";
+        public static final String COLUMN_ADDRESS= "address";
+//        public static final String COLUMN_ADDRESS_TWO = "address_two";
+//        public static final String COLUMN_CITY = "city";
+//        public static final String COLUMN_STATE = "state";
+
 
         public static final Uri CONTENT_URI =
                 BASE_CONTENT_URI.buildUpon().appendPath(PATH_JOB).build();

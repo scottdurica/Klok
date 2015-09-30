@@ -5,4 +5,5 @@
     <dimen name="list_item_margin_left_right">10dp</dimen>
     <dimen name="list_item_margin_top">15dp</dimen>
     <dimen name="ten">10dp</dimen>
+    <dimen name="five">5dp</dimen>
 </resources>

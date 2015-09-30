@@ -1,0 +1,94 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.emroxriprap.klok.TimeDescriptionFragment"
+    android:orientation="vertical"
+    android:padding="@dimen/ten">
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:text="Hours"
+            android:id="@+id/textView5"
+            android:layout_margin="@dimen/ten"
+            android:layout_weight=".15"
+            android:gravity="center_vertical" />
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:ems="10"
+            android:id="@+id/et_hours"
+            android:layout_weight=".35" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:text="Rate"
+            android:id="@+id/textView6"
+            android:layout_weight=".15"
+            android:layout_margin="@dimen/ten"
+            android:gravity="center_vertical" />
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/et_rate"
+            android:layout_weight=".35"
+            android:layout_marginRight="@dimen/ten"
+            android:inputType="numberDecimal" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:text="Description"
+            android:id="@+id/textView7"
+            android:layout_margin="@dimen/ten"
+            android:layout_weight=".25" />
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:inputType="textMultiLine"
+            android:ems="10"
+            android:id="@+id/et_description"
+            android:layout_weight=".6"
+            android:layout_marginRight="@dimen/ten"
+            android:capitalize="sentences"
+            android:lines="4" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_go_to_materials_screen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_arrow_forward_white_24dp"
+            app:elevation="4dp"
+            android:layout_gravity="right|bottom"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="@dimen/ten" />
+    </RelativeLayout>
+</LinearLayout>

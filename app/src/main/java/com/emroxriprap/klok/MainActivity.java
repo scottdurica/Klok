@@ -3,7 +3,7 @@ package com.emroxriprap.klok;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,9 +11,25 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
-public class MainActivity extends ActionBarActivity implements RecordsListFragment.OnFragmentInteractionListener, JobNameFragment.OnFragmentInteractionListener,
-DateFragment.OnFragmentInteractionListener, NewJobCreatorFragment.OnFragmentInteractionListener{
+public class MainActivity extends AppCompatActivity implements RecordsListFragment.OnFragmentInteractionListener, JobNameFragment.OnFragmentInteractionListener,
+DateFragment.OnFragmentInteractionListener, NewJobCreatorFragment.OnFragmentInteractionListener, TimeDescriptionFragment.OnFragmentInteractionListener,
+        MaterialDescriptionFragment.OnFragmentInteractionListener, SummaryFragment.OnFragmentInteractionListener
+{
 
+    public static final String ARG_DATE_STRING = "date_string";
+    public static final String ARG_DATE_INT = "date_int";
+    public static final String ARG_LOCATION = "job_name";
+    public static final String ARG_ADDRESS = "address";
+    public static final String ARG_HOURS = "hours";
+    public static final String ARG_RATE = "rate";
+    public static final String ARG_TIME_DESC = "time_desc";
+    public static final String ARG_LABOR_TOTAL = "labor_total";
+    public static final String ARG_MATERIALS = "materials";
+    public static final String ARG_MARKUP= "markup";
+    public static final String ARG_MATERIAL_DESC = "material_desc";
+    public static final String ARG_MATERIAL_TOTAL = "material_total";
+    public static final String ARG_INVOICED = "invoiced";
+    public static final String ARG_TOTAL = "total";
 
     @Override
     public void onBackPressed() {
